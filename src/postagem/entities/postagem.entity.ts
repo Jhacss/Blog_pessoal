@@ -8,6 +8,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Temas } from '../../temas/entities/temas.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Entity({ name: 'tb_postagens' }) //CREATE TABLE tb_postagens()
 export class Postagem {
@@ -31,4 +32,10 @@ export class Postagem {
     onDelete: 'CASCADE',
   })
   tema: Temas;
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+    onDelete: 'CASCADE',
+  })
+  usuario: Usuario;
 }
+

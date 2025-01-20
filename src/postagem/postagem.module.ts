@@ -6,6 +6,7 @@ import { PostagemService } from "./services/postagem.service";
 import { TemasModule } from "../temas/temas.module";
 import { TemasService } from "../temas/services/temas.service";
 
+
 @Module({
     imports: [TypeOrmModule.forFeature([Postagem]), TemasModule],
     controllers: [PostagemController],
