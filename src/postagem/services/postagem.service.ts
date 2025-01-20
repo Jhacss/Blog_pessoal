@@ -2,17 +2,26 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Postagem } from "../entities/postagem.entity";
 import { DeleteResult, ILike, Repository } from "typeorm";
+import { TemasService } from "../../temas/services/temas.service";
+import { UsuarioService } from "../../usuario/service/usuario.service";
 
 @Injectable()
 export class PostagemService{
 
     constructor(
         @InjectRepository(Postagem)
-        private postagemRepository: Repository<Postagem>
+        private postagemRepository: Repository<Postagem>,
+        private temasService: TemasService,
+       
     ){}
 
     async findAll(): Promise<Postagem[]>{
-        return this.postagemRepository.find(); //SELECT * FROM TB_postagens;
+        return this.postagemRepository.find({
+            relations:{
+                tema: true,
+                usuario: true
+            }
+        }); //SELECT * FROM TB_postagens;
     }
 
     async findByid(id: number): Promise<Postagem>{
@@ -21,6 +30,10 @@ export class PostagemService{
         const postagem = await this.postagemRepository.findOne({
             where: {
                 id
+            },
+            relations:{
+                tema: true,
+                usuario: true
             }
         })
 
@@ -35,6 +48,10 @@ export class PostagemService{
 
         where:{
             titulo: ILike(`%${titulo}%`)
+        },
+        relations:{
+            tema: true,
+            usuario: true
         }
 
         }); 
@@ -42,13 +59,18 @@ export class PostagemService{
     }
 
     async create(postagem: Postagem): Promise<Postagem>{
+
+        await this.temasService.findByid(postagem.tema.id)
+
         //INSERT INTO tb_postagens (titulo, texto) VALUES(?, ?)
         return await this.postagemRepository.save(postagem);
     }
 
     async update(postagem: Postagem): Promise<Postagem>{
 
-        await this.findByid(postagem.id)
+       await this.findByid(postagem.id)
+
+       await this.temasService.findByid(postagem.tema.id)
         //UPDATE tb_postagens SET titulo = postagem.titulo, 
         // texto = postagem.texto, data = CURRENT_TINESTAMP()
         //  WHERE id = postagem.id
