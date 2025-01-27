@@ -62,7 +62,7 @@ describe('Testes dos Módulos Usuario e Auth (e2e)', () => {
       .expect(400);
   });
 
-  it('03 - Deve autentucar o usuário (Login)', async () => {
+  it('03 - Deve autenticar o usuário (Login)', async () => {
     const resposta = await request(app.getHttpServer())
       .post('/usuarios/logar')
       .send({
