@@ -7,10 +7,10 @@ import { PostagemModule } from './postagem/postagem.module';
 import { Temas } from './temas/entities/temas.entity';
 import { TemasModule } from './temas/temas.module';
 import { AuthModule } from './auth/auth.module';
-import { Usuario } from './usuario/entities/usuario.entity';
 import { UsuarioModule } from './usuario/usuario.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProdService } from './data/prod.service';
+import { DevService } from './data/dev.service';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ TypeOrmModule.forRootAsync({
     AuthModule,
     UsuarioModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
