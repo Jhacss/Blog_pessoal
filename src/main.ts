@@ -24,6 +24,6 @@ async function bootstrap() {
   //habilitando o Cors na aplicação feito para linkar o back com o front sendo hospedados em hosts diferentes
   app.enableCors();
 
-  await app.listen(process.env.PORT ?? 4000);
+  await app.listen(process.env.PORT ?? 5432);
 }
 bootstrap();
