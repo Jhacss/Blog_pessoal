@@ -9,7 +9,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
   .setTitle('Blog Pessoal')
   .setDescription('Projeto Blog Pessoal')
-  .setContact("Generation Brasil","http://www.generationbrasil.online","generation@email.com")
+  .setContact("João Henrique","https://www.linkedin.com/in/jo%C3%A3o-henrique-0665081a2/","jh09.joao@gmail.com")
   .setVersion('1.0')
   .addBearerAuth()
   .build();
@@ -24,6 +24,6 @@ async function bootstrap() {
   //habilitando o Cors na aplicação feito para linkar o back com o front sendo hospedados em hosts diferentes
   app.enableCors();
 
-  await app.listen(process.env.PORT ?? 5432);
+  await app.listen(process.env.PORT ?? 4000);
 }
 bootstrap();
