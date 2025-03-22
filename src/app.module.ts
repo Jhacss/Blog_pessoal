@@ -15,10 +15,10 @@ import { DevService } from './data/dev.service';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-TypeOrmModule.forRootAsync({
-	useClass: ProdService, //DevService para rodar local
-    imports: [ConfigModule],
-}),
+    TypeOrmModule.forRootAsync({
+      useClass: ProdService, //DevService para rodar local
+      imports: [ConfigModule],
+    }),
     PostagemModule,
     TemasModule,
     AuthModule,
